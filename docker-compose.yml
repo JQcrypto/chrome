@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  chromium:
+    image: lscr.io/linuxserver/chromium:latest
+    container_name: chrome
+    privileged: true
+    environment:
+      - TITLE=chrome
+      - DISPLAY=:1
+      - PUID=1000
+      - PGID=1000
+      - CUSTOM_USER=${USERNAME}
+      - PASSWORD=${PASSWORD}
+      - LANGUAGE=ru_RU.UTF-8
+      - CHROME_CLI=https://app.getgrass.io/register https://app.gradient.network https://app.blockmesh.xyz https://app.nodepay.ai https://dataquest.nvg8.io https://www.starpower.world/wallet https://bless.network/dashboard
+    volumes:
+      - ${HOME}/chromium/config:/config
+    ports:
+      - "0.0.0.0:${PORT}:3000"  
+    shm_size: '4gb'
+    restart: unless-stopped
